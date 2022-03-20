@@ -13,7 +13,7 @@ class UpdateTodoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class UpdateTodoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'text' => 'nullable|string|max:255',
+            'done' => 'nullable|boolean',
         ];
     }
 }

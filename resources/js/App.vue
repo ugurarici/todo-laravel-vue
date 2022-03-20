@@ -26,22 +26,27 @@ export default {
     return {
       message: "Hello Vue!",
       newTodo: "",
-      todos: [
-        { text: "Learn JavaScript", done: true },
-        { text: "Learn Vue", done: false },
-        { text: "Build something awesome", done: false },
-      ],
+      todos: [],
     };
   },
   methods: {
     addTodo() {
       if (this.newTodo == "") return;
-      this.todos.push({
-        text: this.newTodo,
-        done: false,
-      });
+      axios
+        .post("todos", {
+          text: this.newTodo,
+        })
+        .then((response) => {
+          this.todos.push(response.data);
+        });
       this.newTodo = "";
     },
+  },
+  beforeMount() {
+    //  get todos from api with axios
+    axios.get("todos").then((response) => {
+      this.todos = response.data;
+    });
   },
 };
 </script>

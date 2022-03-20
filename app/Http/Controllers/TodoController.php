@@ -74,7 +74,21 @@ class TodoController extends Controller
      */
     public function update(UpdateTodoRequest $request, Todo $todo)
     {
-        //
+        if (isset($request->text)) {
+            $todo->text = $request->input('text');
+        }
+
+        if (isset($request->done)) {
+            if ($request->boolean('done')) {
+                $todo->completed_at = now();
+            } else {
+                $todo->completed_at = null;
+            }
+        }
+
+        $todo->save();
+
+        return response()->json($todo);
     }
 
     /**

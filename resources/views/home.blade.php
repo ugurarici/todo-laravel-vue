@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- add csrf token as a meta tag -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- add api base url as a meta tag -->
+    <meta name="api-base-url" content="{{ route('api.base') }}">
 </head>
 
 <body class="antialiased">
